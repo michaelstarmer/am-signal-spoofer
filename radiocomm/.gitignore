@@ -1,0 +1,5 @@
+bin
+generated/*
+lib*
+include
+pyenv.cfg

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  
+  backend:
+    build: ./backend
+    ports:
+      - 3001:3333
+    volumes:
+      - ./backend/src:/src
+    environment:
+      VIRTUAL_HOST: interface.local
