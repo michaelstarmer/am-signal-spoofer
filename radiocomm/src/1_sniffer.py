@@ -25,6 +25,8 @@ if __name__ == '__main__':
     def categorize(MEASURES):
         res = query("SELECT * FROM signals")
         print("Res:", res)
+        for row in res:
+            print(row)
         return False
         csv = open(EXPORT_PATH, 'w+')
         csv.write('timestamp,output\n')

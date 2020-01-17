@@ -33,7 +33,6 @@ def load_signature(path):
         try:
             for i, row in enumerate(reader):
                 if i == 0: continue # skip header
-                print('FOUND: {}'.format(int(row[1]))) if row[1] == '1' else False
                 float_x = float(row[0])
                 int_y = int(row[1])
 
@@ -51,7 +50,11 @@ def transmit_code(in_signal):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(TRANSMIT_PIN, GPIO.OUT)
 
-    fpath = '../generated/transmit-signature.csv'.format(in_signal)
+    arg = '-{}'.format(in_signal) if in_signal else ''
+    fpath = '../generated/transmit-signature{}.csv'.format(arg)
+
+    print("Transmitting signature:", fpath)
+
     code = load_signature(fpath)
     
     start_time = datetime.now()
@@ -86,7 +89,11 @@ def transmit_code(in_signal):
 
 
 if __name__ == '__main__':
-    transmit_code('off')
+    for arg in sys.argv[1:]:
+        print("ARG:", arg)
+        transmit_code(arg)
+        time.sleep(0.5)
+    
     # for arg in sys.argv[1:]:
     #     exec('transmit_code(' + str(arg) + ')')
 
