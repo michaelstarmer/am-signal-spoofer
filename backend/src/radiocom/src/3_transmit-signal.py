@@ -85,13 +85,22 @@ def transmit_code(in_signal = None):
 
 if __name__ == '__main__':
 
-    if sys.argv[1:]:
-        for arg in sys.argv[1:]:
-            print("ARG:", arg)
-            transmit_code(arg)
-            time.sleep(0.5)
-    else:
-        transmit_code()
+    try:
+        if sys.argv[1:]:
+            for arg in sys.argv[1:]:
+                print("ARG:", arg)
+                transmit_code(arg)
+                time.sleep(0.5)
+        else:
+            transmit_code()
+
+        print("Success")
+        sys.stdout.flush()
+        
+    except:
+        e = sys.exc_info()[0]
+        print(e)
+        sys.stdout.flush()
     
     # for arg in sys.argv[1:]:
     #     exec('transmit_code(' + str(arg) + ')')

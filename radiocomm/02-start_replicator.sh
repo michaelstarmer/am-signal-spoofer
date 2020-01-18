@@ -14,5 +14,7 @@ echo "Success. Signature saved to generated/"
 
 timestamp=$( date +%s )
 rsync -a ../generated/ mps@192.168.0.10:~/dev/projects/facki/radiocomm/generated
+rsync -a ../workspace/ mps@192.168.0.10:~/dev/projects/facki/radiocomm/workspace
+
 # rsync -a ./generated/ mps@192.168.0.10:~/dev/projects/facki/pi-transmitter/generated/export-"$timestamp".csv
 #scp ./signal-log.txt mps@192.168.0.10:~/dev/projects/pi-transmitter/results/signal-log-"$timestamp".txt

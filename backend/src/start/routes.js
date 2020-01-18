@@ -17,4 +17,5 @@
 const Route = use('Route')
 
 Route.get('/', 'AppController.index');
-Route.on('/').render('welcome')
+Route.get('/signals', 'AppController.view_saved_signals');
+Route.get('/transmit/:id', 'AppController.transmit');

@@ -8,6 +8,7 @@ class SignalSchema extends Schema {
     this.create('signals', (table) => {
       table.increments()
       table.string('title', 80)
+      table.string('argument', 20)
       table.string('export_path', 150)
       table.string('signature_path', 150)
       table.timestamps()
