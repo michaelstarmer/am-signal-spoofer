@@ -2,6 +2,7 @@
 const Signal = use('App/Models/Signal');
 const spawn = require('child_process').spawn;
 const Helpers = use('Helpers');
+const {PythonShell} = require('python-shell');
 
 class AppController {
     async index({ view })
@@ -29,9 +30,12 @@ class AppController {
 
         // console.log('Result:', signal);
         try {
-            await this.exec_script(SCRIPT_PATH, signal.argument);
+            PythonShell.run(SCRIPT_PATH, null, function (err) {
+                if (err) throw err;
+                console.log('finished');
+                return response.json({success: true})
+              });
 
-            return response.json({success: true})
         } catch (error) {
             console.log('transmit error', error)
             return response.json({success: false})
@@ -43,7 +47,13 @@ class AppController {
         return new Promise((resolve, reject) => {
             try {
                 console.log(`Path: ${path}, arg: ${arg}`)
-                const pythonProcess = spawn('python', [path, arg])
+                
+                PythonShell.run(path, {args: arg}, function (err) {
+                    if (err) throw err;
+                    console.log('finished');
+                  });
+
+                const pythonProcess = spawn('python', [path, arg ? arg : null])
                 
                 pythonProcess.stdout.on('data', data => {
                     console.log("Got data back")

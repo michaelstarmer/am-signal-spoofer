@@ -20,7 +20,7 @@ Route.get('/', 'AppController.index');
 Route.get('/signals', 'AppController.view_saved_signals');
 
 Route.get('/intercept', 'AppController.intercept')
-Route.post('/intercept/start', 'AppController.post_intercept')
+Route.get('/intercept/start', 'AppController.post_intercept')
 
 Route.get('/transmit/:id', 'AppController.transmit');
 

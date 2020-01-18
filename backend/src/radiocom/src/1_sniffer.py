@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import numpy as np
 import time
+import sys
 
 from db import query
 
@@ -111,4 +112,6 @@ if __name__ == '__main__':
     gen_graph = generate_graph()
 
     if save_data(RECEIVED_SIGNAL):
-        show_graph(gen_graph)
+        print("Done")
+        sys.stdout.flush()
+        #show_graph(gen_graph)

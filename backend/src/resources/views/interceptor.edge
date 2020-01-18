@@ -19,22 +19,23 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded",function(){
+    const statusWrap = document.getElementById('status_wrap');
+    const statusText = document.getElementById('status_text');
+    const form = document.getElementById('form');
 
-const statusWrap = document.getElementById('status_wrap');
-const statusText = document.getElementById('status_text');
-const form = document.getElementById('form');
-
-fetch('/intercept/start')
-    .then(() => {
-        console.log("Interceptor done.");
-        statusText.innerHTML = 'Success!';
-        statusWrap.classList.add('bg_success');
-        form.classList.remove('hidden');
-    })
-    .catch(e => {
-        console.log("Interceptor failed.");
-        statusText.innerHTML = 'Success!';
-    })
+    fetch('/intercept/start')
+        .then((data) => {
+            console.log("Interceptor done.", data);
+            statusText.innerHTML = 'Success!';
+            statusWrap.classList.add('bg_success');
+            form.classList.remove('hidden');
+        })
+        .catch(e => {
+            console.log("Interceptor failed.");
+            statusText.innerHTML = 'Success!';
+        })
+    });
 
 </script>
 
