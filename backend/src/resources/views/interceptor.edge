@@ -1,0 +1,41 @@
+@layout('layouts.master')
+@section('main')
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6 offset-lg-3">
+            <div id="status_wrap" class="status-wrap my-5 p-3">
+                <h1 id="status_text">Intercept in progress...</h1>
+                <form id="form" class="hidden" action="/encode" method="POST">
+                    {{ csrfField() }}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="title" placeholder="Title">
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+const statusWrap = document.getElementById('status_wrap');
+const statusText = document.getElementById('status_text');
+const form = document.getElementById('form');
+
+fetch('/intercept/start')
+    .then(() => {
+        console.log("Interceptor done.");
+        statusText.innerHTML = 'Success!';
+        statusWrap.classList.add('bg_success');
+        form.classList.remove('hidden');
+    })
+    .catch(e => {
+        console.log("Interceptor failed.");
+        statusText.innerHTML = 'Success!';
+    })
+
+</script>
+
+@endsection

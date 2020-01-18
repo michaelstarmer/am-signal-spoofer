@@ -18,6 +18,26 @@ class AppController {
         return view.render('saved-signals', { signals: signals.toJSON() });
     }
 
+    async intercept({ view })
+    {
+        return view.render('interceptor');
+    }
+
+    async post_intercept({ request, response })
+    {
+        const SCRIPT_PATH = `${Helpers.appRoot()}/radiocom/src/1_sniffer.py`;
+
+        // console.log('Result:', signal);
+        try {
+            await this.exec_script(SCRIPT_PATH, signal.argument);
+
+            return response.json({success: true})
+        } catch (error) {
+            console.log('transmit error', error)
+            return response.json({success: false})
+        }
+    }
+
     exec_script(path, arg)
     {
         return new Promise((resolve, reject) => {
@@ -62,8 +82,29 @@ class AppController {
         } catch (error) {
             console.log('transmit error', error)
         }
+    }
 
+    async view_encode({ view })
+    {
+        return view.render('encode-form');
+    }
+
+    async post_encode({ request, response })
+    {
+        const SCRIPT_PATH = `${Helpers.appRoot()}/radiocom/src/2_transmit-signal.py`;
         
+        const { title } = request.only(['title']);
+        console.log(title)
+        return
+
+        // console.log('Result:', signal);
+        try {
+            await this.exec_script(SCRIPT_PATH, signal.argument);
+
+            return response.redirect('/signals')
+        } catch (error) {
+            console.log('transmit error', error)
+        }
     }
 }
 

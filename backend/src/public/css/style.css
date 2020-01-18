@@ -12,3 +12,19 @@
 {
     text-align: center;
 }
+
+.status-wrap
+{
+    width: 100%;
+    background-color: beige;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.bg_success
+{
+    background-color: aquamarine;
+}

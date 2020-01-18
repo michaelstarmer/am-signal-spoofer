@@ -18,4 +18,11 @@ const Route = use('Route')
 
 Route.get('/', 'AppController.index');
 Route.get('/signals', 'AppController.view_saved_signals');
+
+Route.get('/intercept', 'AppController.intercept')
+Route.post('/intercept/start', 'AppController.post_intercept')
+
 Route.get('/transmit/:id', 'AppController.transmit');
+
+Route.get('/encode', 'AppController.view_encode')
+Route.post('/encode', 'AppController.post_encode')
